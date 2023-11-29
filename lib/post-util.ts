@@ -1,12 +1,16 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import { IPost } from "@/interfaces/post";
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import { IPost } from '@/interfaces/post';
 
-const postsDirectory = path.join(process.cwd(), "posts");
+const postsDirectory = path.join(process.cwd(), 'posts');
+
+export function getPostsFiles() {
+  return fs.readdirSync(postsDirectory);
+}
 
 export function getAllPosts(): IPost[] {
-  const postFiles = fs.readdirSync(postsDirectory);
+  const postFiles = getPostsFiles();
 
   const allPosts = postFiles.map((postFile) => {
     return getPostData(postFile);
@@ -25,12 +29,11 @@ export function getFeaturedPosts() {
   return allPosts.filter((post) => post.isFeatured);
 }
 
-function getPostData(fileName: string): IPost {
-  const filePath = path.join(postsDirectory, fileName);
-  const fileContent = fs.readFileSync(filePath, "utf-8");
+export function getPostData(postIdentifier: string): IPost {
+  const postSlug = postIdentifier.replace(/\.md$/, ''); // removes the file extension
+  const filePath = path.join(postsDirectory, `${postSlug}.md`);
+  const fileContent = fs.readFileSync(filePath, 'utf-8');
   const { data, content } = matter(fileContent);
-
-  const postSlug = fileName.substring(0, fileName.indexOf(".md")); // removes the file extension
 
   const postData: IPost = {
     ...(data as IPost),

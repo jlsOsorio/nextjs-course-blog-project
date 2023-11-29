@@ -1,8 +1,9 @@
-import FeaturedPosts from "@/components/home-page/featured-posts";
-import Hero from "@/components/home-page/hero";
-import { IPost } from "@/interfaces/post";
-import { getFeaturedPosts } from "@/lib/post-util";
-import React from "react";
+import React from 'react';
+
+import FeaturedPosts from '@/components/home-page/featured-posts';
+import Hero from '@/components/home-page/hero';
+import { IPost } from '@/interfaces/post';
+import { getFeaturedPosts } from '@/lib/post-util';
 
 interface HomePageProps {
   posts: IPost[];

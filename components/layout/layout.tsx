@@ -1,4 +1,5 @@
 import React from 'react';
+
 import MainNavigation from './main-navigation';
 
 interface LayoutProps {
