@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { GetStaticPropsContext } from 'next';
 
 import PostContent from '@/components/posts/post-detail/post-content';
@@ -10,7 +11,15 @@ interface PostDetailPageProps {
 }
 
 const PostDetailPage = ({ post }: PostDetailPageProps) => {
-  return <PostContent post={post} />;
+  return (
+    <>
+      <Head>
+        <title>{post.title}</title>
+        <meta name="description" content={post.excerpt} />
+      </Head>
+      <PostContent post={post} />
+    </>
+  );
 };
 
 export async function getStaticProps(context: GetStaticPropsContext) {

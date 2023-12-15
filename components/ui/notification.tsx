@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 import { INotification } from '@/interfaces/notification';
 import styles from './notification.module.css';
 
@@ -14,11 +17,12 @@ const Notification = ({ title, message, status }: INotification) => {
 
   const cssClasses = `${styles.notification} ${statusClasses}`;
 
-  return (
+  return ReactDOM.createPortal(
     <div className={cssClasses}>
       <h2>{title}</h2>
       <p>{message}</p>
-    </div>
+    </div>,
+    document.getElementById('notifications') as HTMLElement
   );
 };
 
