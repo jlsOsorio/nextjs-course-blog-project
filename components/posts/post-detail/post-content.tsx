@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import atomDark from 'react-syntax-highlighter/dist/cjs/styles/prism/atom-dark';
+import js from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
+import css from 'react-syntax-highlighter/dist/cjs/languages/prism/css';
 
 import PostHeader from './post-header';
 import styles from './post-content.module.css';
@@ -22,6 +24,9 @@ interface CodeProps {
   className?: string;
   children?: React.ReactNode;
 }
+
+SyntaxHighlighter.registerLanguage('js', js);
+SyntaxHighlighter.registerLanguage('css', css);
 
 const PostContent = ({ post }: PostContentProps) => {
   const imagePath = `/images/posts/${post.slug}/${post.image}`;
