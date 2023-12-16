@@ -47,7 +47,7 @@ async function handler(
       return;
     }
 
-    const db = client.db(process.env.DB_NAME);
+    const db = client.db(process.env.mongodb_database);
 
     try {
       const result = await db.collection('messages').insertOne(newMessage);
